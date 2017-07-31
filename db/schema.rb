@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170728060355) do
+ActiveRecord::Schema.define(version: 20170730060055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,4 +46,31 @@ ActiveRecord::Schema.define(version: 20170728060355) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "matches", force: :cascade do |t|
+    t.string "name"
+    t.bigint "team1_id"
+    t.bigint "team2_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team1_id"], name: "index_matches_on_team1_id"
+    t.index ["team2_id"], name: "index_matches_on_team2_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.bigint "team_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_players_on_team_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "matches", "teams", column: "team1_id"
+  add_foreign_key "matches", "teams", column: "team2_id"
+  add_foreign_key "players", "teams"
 end
