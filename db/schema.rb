@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170730060055) do
+ActiveRecord::Schema.define(version: 20170731065018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,38 @@ ActiveRecord::Schema.define(version: 20170730060055) do
     t.index ["team_id"], name: "index_players_on_team_id"
   end
 
+  create_table "stats", force: :cascade do |t|
+    t.bigint "player_id"
+    t.integer "matches"
+    t.integer "innings"
+    t.integer "not_outs"
+    t.integer "bat_runs"
+    t.integer "high_score"
+    t.decimal "bat_avg", precision: 5, scale: 2
+    t.integer "balls_faced"
+    t.decimal "bat_strike_rate", precision: 5, scale: 2
+    t.integer "hundred"
+    t.integer "fifty"
+    t.integer "six"
+    t.integer "four"
+    t.integer "zero"
+    t.integer "overs"
+    t.integer "maidens"
+    t.integer "bowl_runs"
+    t.integer "wickets"
+    t.integer "best_bowling_wicket"
+    t.integer "best_bowling_runs"
+    t.decimal "bowl_avg", precision: 5, scale: 2
+    t.decimal "economy", precision: 5, scale: 2
+    t.decimal "bowl_strike_rate", precision: 5, scale: 2
+    t.integer "five_wickets"
+    t.integer "catches"
+    t.integer "stumpings"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_stats_on_player_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -73,4 +105,5 @@ ActiveRecord::Schema.define(version: 20170730060055) do
   add_foreign_key "matches", "teams", column: "team1_id"
   add_foreign_key "matches", "teams", column: "team2_id"
   add_foreign_key "players", "teams"
+  add_foreign_key "stats", "players"
 end
