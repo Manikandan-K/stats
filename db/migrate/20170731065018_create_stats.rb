@@ -18,12 +18,12 @@ class CreateStats < ActiveRecord::Migration[5.1]
       t.integer :four
       t.integer :zero
 
-      t.integer :overs
-      t.integer :maidens
-      t.integer :bowl_runs
-      t.integer :wickets
-      t.integer :best_bowling_wicket
-      t.integer :best_bowling_runs
+      t.integer :overs, default: 0
+      t.integer :maidens, default: 0
+      t.integer :bowl_runs, default: 0
+      t.integer :wickets, default: 0
+      t.integer :best_bowling_wicket, default: 0
+      t.integer :best_bowling_runs, default: 0
       t.decimal :bowl_avg, precision: 5, scale: 2
       t.decimal :economy, precision: 5, scale: 2
       t.decimal :bowl_strike_rate, precision: 5, scale: 2
