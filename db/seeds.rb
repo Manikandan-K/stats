@@ -6,3 +6,28 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+al = Team.create!(name: 'Ashok Leyland')
+tvs = Team.create!(name: 'TVS')
+Match.create!(date: Date.new, team1: al, team2: tvs)
+
+player = Player.create!(name:  'Karthick', team: al)
+
+Stat.create!(
+        player: player,
+        matches: 101,
+        innings: 90,
+        not_outs: 15,
+        bat_runs: 2250,
+        high_score: 126,
+        bat_avg: 30,
+        balls_faced: 2500,
+        bat_strike_rate: 90,
+        hundred: 3,
+        fifty: 9,
+        six: 26,
+        four: 53,
+        zero: 0,
+        overs: 7.3,
+        maidens: 1,
+)
