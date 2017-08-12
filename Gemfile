@@ -35,3 +35,6 @@ gem 'sass-rails', '~> 5.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 2.7.2'
+
+
+ruby "2.4.1"
