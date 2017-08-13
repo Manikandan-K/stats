@@ -3,7 +3,7 @@ class Stat < ApplicationRecord
 
   def recalc(score_entry)
     self.matches += 1
-    self.innings += 1 if score_entry.contributed
+    self.innings += 1 if score_entry.batted
     self.not_outs += 1 unless score_entry.out
 
     bat_runs = with_default(score_entry, :bat_runs)
@@ -42,12 +42,6 @@ class Stat < ApplicationRecord
     wickets = with_default(score_entry, :wickets)
     runs = with_default(score_entry, :bowl_runs)
 
-    p '*' * 100
-    p 'wickets'
-    p wickets
-    p self.best_bowling_wicket
-    p '*' * 100
-
     if wickets > self.best_bowling_wicket
       self.best_bowling_wicket = wickets
       self.best_bowling_runs = runs
@@ -73,11 +67,6 @@ class Stat < ApplicationRecord
 
   def to_over(balls)
     (balls / 6 ).to_i + (balls % 6).to_f / 10
-  end
-
-  def before_create
-    self.best_bowling_wicket ||= 0
-    self.best_bowling_runs ||= 0
   end
 
 end

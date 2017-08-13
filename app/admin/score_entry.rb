@@ -3,6 +3,7 @@ ActiveAdmin.register ScoreEntry do
 
   after_create do |score_entry|
     stat = Stat.find_by(player_id: score_entry.player_id)
+    stat = Stat.new(player: score_entry.player) if stat.nil?
     stat.recalc(score_entry)
     stat.save!
   end
